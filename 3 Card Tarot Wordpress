@@ -1,0 +1,77 @@
+<?php
+/*
+Plugin Name: Tarot Card Reading
+Description: This plugin will provide a 3 card tarot reading
+Version: 1.0
+Author: TarotReader
+*/
+
+//register function
+function tarot_card_reading_register() {
+    add_menu_page(
+        'Tarot Card Reading',
+        'Tarot Card Reading',
+        'manage_options',
+        'tarot-card-reading',
+        'tarot_card_reading_admin_menu',
+        'dashicons-palmtree',
+        6
+    );
+}
+add_action('admin_menu', 'tarot_card_reading_register');
+
+//admin page function
+function tarot_card_reading_admin_menu(){
+    ?>
+    <div class="wrap">
+        <h2>Tarot Card Reading</h2>
+        <p>Welcome to the tarot card reading plugin!</p>
+        <p>This plugin will provide a 3 card tarot reading.</p>
+        <p>To get started, click the button below.</p>
+        <form action="" method="post">
+            <input type="submit" name="tarot_card_reading_submit" value="Start Reading" />
+        </form>
+        <?php
+        if(isset($_POST['tarot_card_reading_submit'])) {
+            //generate an array of tarot cards
+            $cards = array(
+                'The Fool',
+                'The Magician',
+                'The High Priestess',
+                'The Empress',
+                'The Emperor',
+                'The Hierophant',
+                'The Lovers',
+                'The Chariot',
+                'Strength',
+                'The Hermit',
+                'Wheel of Fortune',
+                'Justice',
+                'The Hanged Man',
+                'Death',
+                'Temperance',
+                'The Devil',
+                'The Tower',
+                'The Star',
+                'The Moon',
+                'The Sun',
+                'Judgement',
+                'The World'
+            );
+            //shuffle the array
+            shuffle($cards);
+            //pick the first 3 cards
+            $card1 = $cards[0];
+            $card2 = $cards[1];
+            $card3 = $cards[2];
+            //display the reading
+            echo '<p>Your tarot card reading:</p>';
+            echo '<p>Card 1: '.$card1.'</p>';
+            echo '<p>Card 2: '.$card2.'</p>';
+            echo '<p>Card 3: '.$card3.'</p>';
+        }
+        ?>
+    </div>
+    <?php
+}
+?>
